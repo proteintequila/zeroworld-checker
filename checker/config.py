@@ -15,11 +15,12 @@ except ValueError:
     CHAT_ID = 0  # 기본값 (설정 필요함을 알림)
 
 # 모니터링 대상 설정
-THEME_NAME = "사랑...하는...감?"
+THEME_NAME = "층간소음"
 
-# 날짜 범위 설정 (테스트용 8월 2일 고정)
-DATE_START = "2025-08-02"  # 테스트 날짜
-DATE_END = "2025-08-02"    # 테스트 날짜
+# 날짜 범위 설정 (현재 날짜부터 8월 16일까지)
+today = datetime.now().date()
+DATE_START = today.strftime("%Y-%m-%d")  # 현재 날짜부터
+DATE_END = "2025-08-16"    # 8월 16일까지
 
 # 시간 설정
 TIMEZONE = "Asia/Seoul"
