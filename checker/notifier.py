@@ -49,7 +49,14 @@ class TelegramNotifier:
                 logger.info("환경변수 TELEGRAM_CHAT_ID를 설정하거나 config.py를 수정하세요.")
                 return
             
-            self.bot = Bot(token=self.bot_token)
+            # Bot 객체에 timeout 설정
+            from telegram.request import HTTPXRequest
+            request = HTTPXRequest(
+                read_timeout=10,
+                write_timeout=10,
+                connect_timeout=10
+            )
+            self.bot = Bot(token=self.bot_token, request=request)
             logger.info("텔레그램 봇 초기화 완료")
             
         except Exception as e:
@@ -229,7 +236,14 @@ class TelegramBotHandler:
         self.application = None
         
         if TELEGRAM_AVAILABLE and BOT_TOKEN != "YOUR_BOT_TOKEN_HERE":
-            self.application = Application.builder().token(BOT_TOKEN).build()
+            # Bot 객체에 timeout 설정
+            from telegram.request import HTTPXRequest
+            request = HTTPXRequest(
+                read_timeout=10,
+                write_timeout=10,
+                connect_timeout=10
+            )
+            self.application = Application.builder().token(BOT_TOKEN).request(request).build()
             self._setup_handlers()
     
     def _setup_handlers(self):
@@ -396,11 +410,8 @@ class TelegramBotHandler:
             # polling 시작 (지속적으로 실행)
             await self.application.updater.start_polling(
                 poll_interval=1.0,  # 1초마다 업데이트 확인
-                timeout=10,         # 10초 타임아웃
                 bootstrap_retries=-1,  # 무제한 재시도
-                read_timeout=2,
-                write_timeout=2,
-                connect_timeout=2
+                allowed_updates=None  # 모든 업데이트 허용
             )
             
             # polling이 시작된 후 대기 (이것이 중요!)
