@@ -5,6 +5,3 @@ loguru>=0.7
 beautifulsoup4>=4.12
 lxml>=5.0
 fake-useragent>=1.5
-# 필요 시 셀레니움 추가
-# selenium>=4.21
-# webdriver-manager>=4.0 
