@@ -74,6 +74,7 @@ class ZeroworldFetcher:
         try:
             # 1. API에서 기본적으로 매진이라고 하면 매진
             if api_reservation:
+                logger.debug(f"API에서 매진 처리: {date_str} {time_str}")
                 return False
             
             # 2. 숨겨진 데이터에서 실제 예약 여부 확인
@@ -82,6 +83,21 @@ class ZeroworldFetcher:
             
             # 숨겨진 데이터에 해당 타임스탬프가 있으면 예약됨
             is_really_reserved = str(timestamp) in theme_reservations
+            
+            # ⚠️ 추가 검증: 현재 시간보다 과거인 슬롯은 무조건 매진 처리
+            from datetime import datetime
+            try:
+                slot_datetime = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M:%S")
+                if slot_datetime < datetime.now():
+                    logger.debug(f"과거 시간대로 매진 처리: {date_str} {time_str}")
+                    return False
+            except:
+                pass
+            
+            # ⚠️ 거짓 양성 방지: 숨겨진 데이터가 없으면 API 결과만 사용
+            if not hidden_data or not theme_reservations:
+                logger.warning(f"숨겨진 데이터 없음 - API 결과만 사용: {date_str} {time_str}")
+                return not api_reservation
             
             logger.debug(f"예약 상태 확인: {date_str} {time_str}")
             logger.debug(f"  - API reservation: {api_reservation}")
@@ -92,7 +108,7 @@ class ZeroworldFetcher:
             
         except Exception as e:
             logger.error(f"예약 상태 확인 실패: {e}")
-            # 오류 시 API 결과 사용
+            # 오류 시 API 결과 사용 (보수적 접근)
             return not api_reservation
     
     def _initialize_session(self):

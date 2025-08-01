@@ -50,7 +50,7 @@ BASE_URL = "https://zerohongdae.com"
 RESERVATION_URL = f"{BASE_URL}/reservation"
 
 # 로그 설정
-LOG_LEVEL = "INFO"
+LOG_LEVEL = "DEBUG"  # 디버깅을 위해 DEBUG 레벨로 변경
 LOG_ROTATION = "1 MB"
 LOG_RETENTION = "5 days"
 
