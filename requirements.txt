@@ -5,3 +5,4 @@ loguru>=0.7
 beautifulsoup4>=4.12
 lxml>=5.0
 fake-useragent>=1.5
+aiohttp>=3.8
