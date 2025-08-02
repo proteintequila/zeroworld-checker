@@ -15,7 +15,7 @@ except ValueError:
     CHAT_ID = 0  # 기본값 (설정 필요함을 알림)
 
 # 모니터링 대상 설정
-THEME_NAME = "층간소음"
+THEME_NAME = "사랑하는감?"
 
 # 날짜 범위 설정 (현재 날짜부터 8월 16일까지)
 today = datetime.now().date()
