@@ -320,14 +320,20 @@ class TelegramBotHandler:
             f"🤖 <b>제로월드 모니터링 봇 명령어</b>\n\n"
             f"📊 <b>/status</b> - 현재 모니터링 상태 확인\n"
             f"🌿 <b>/branch</b> - Railway 브랜치 전환 및 배포\n"
-            f"   • <code>/branch main</code> - 메인 브랜치 (층간소음)\n"
-            f"   • <code>/branch test</code> - 테스트 브랜치 (사랑하는감?)\n"
+            f"   • <code>/branch main</code> - 메인 브랜치 (층간소음 테마)\n"
+            f"   • <code>/branch test</code> - 테스트 브랜치 (사랑하는감? 테마)\n"
+            f"   • ⏱️ 브랜치 전환 후 약 2-3분 소요\n"
+            f"   • 🎯 테스트 브랜치는 예약 슬롯이 많아 테스트 용이\n"
+            f"🧪 <b>/test</b> - 봇 연결 테스트\n"
             f"❓ <b>/help</b> - 이 도움말 보기\n"
             f"🚀 <b>/start</b> - 봇 시작 인사\n\n"
             f"💡 <b>자동 기능:</b>\n"
             f"• 예약 가능한 슬롯 발견 시 즉시 알림\n"
             f"• 매 정각 상태 메시지 전송\n"
-            f"• 오류 발생 시 자동 알림"
+            f"• 오류 발생 시 자동 알림\n\n"
+            f"⚠️ <b>주의사항:</b>\n"
+            f"• 브랜치 전환은 새로운 배포를 시작합니다\n"
+            f"• 전환 중에는 잠시 서비스가 중단될 수 있습니다"
         )
         
         await update.message.reply_text(help_msg, parse_mode='HTML')
