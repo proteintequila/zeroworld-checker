@@ -1,0 +1,20 @@
+# Git UTF-8 설정 파일
+# 한글 커밋 메시지 및 파일명 올바른 표시
+
+[core]
+    # 파일명에 한글이 포함된 경우 올바르게 표시
+    quotepath = false
+    # UTF-8 인코딩 사용
+    precomposeunicode = true
+    
+[i18n]
+    # 커밋 메시지를 UTF-8로 인코딩
+    commitencoding = utf-8
+    # 로그 출력을 UTF-8로 인코딩  
+    logoutputencoding = utf-8
+
+[gui]
+    encoding = utf-8
+    
+[svn]
+    pathnameencoding = utf-8

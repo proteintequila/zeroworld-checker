@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 제로월드 예약 모니터링 시스템 메인 모듈
 
@@ -409,6 +410,7 @@ def main():
     parser.add_argument('--once', action='store_true', help='한 번만 체크하고 종료')
     parser.add_argument('--config-test', action='store_true', help='설정 테스트')
     parser.add_argument('--bot-test', action='store_true', help='텔레그램 봇 polling 테스트')
+    parser.add_argument('--railway-test', action='store_true', help='Railway API 설정 테스트')
     
     args = parser.parse_args()
     
@@ -432,6 +434,17 @@ def main():
             sys.exit(0)
         else:
             logger.error("❌ 봇 polling 테스트 실패!")
+            sys.exit(1)
+    
+    elif args.railway_test:
+        # Railway API 설정 테스트
+        logger.info("=== Railway API 설정 테스트 ===")
+        from .railway_api import test_railway_settings
+        if test_railway_settings():
+            logger.info("🎉 Railway API 설정 완료!")
+            sys.exit(0)
+        else:
+            logger.error("❌ Railway API 설정 미완료!")
             sys.exit(1)
             
     elif args.test:

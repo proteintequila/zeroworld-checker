@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 제로월드 예약 모니터링 시스템 설정 파일
 """
@@ -15,7 +16,8 @@ except ValueError:
     CHAT_ID = 0  # 기본값 (설정 필요함을 알림)
 
 # 모니터링 대상 설정
-THEME_NAME = "층간소음"
+# main 브랜치: "층간소음", test 브랜치: "사랑하는감?"
+THEME_NAME = "사랑하는감?"  # test 브랜치용
 
 # 날짜 범위 설정 (현재 날짜부터 8월 16일까지)
 today = datetime.now().date()

@@ -1,0 +1,77 @@
+# Cursor AI가 읽지 않을 파일/폴더 목록
+# 토큰 낭비 방지 및 컨텍스트 최적화
+
+# Python 캐시 및 컴파일된 파일
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 런타임 생성 파일들 (중요하지만 AI가 읽을 필요 없음)
+state.json
+state.json.tmp
+state.json.backup
+*.log
+logs/
+checker.log*
+
+# 환경 및 가상환경
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE 및 에디터 설정
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git 관련
+.git/
+.gitignore
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 임시 파일
+*.tmp
+*.temp
+*.bak
+
+# 테스트 결과 및 커버리지
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 문서 빌드 결과물 (필요시)
+docs/_build/
+
+# Railway 로컬 파일 (있다면)
+.railway/

@@ -1,0 +1,36 @@
+# Cursor AI 작업 규칙 및 컨텍스트 최적화
+
+## 프로젝트 컨텍스트
+이 프로젝트는 제로월드 예약 모니터링 시스템입니다.
+- Python 기반의 웹 스크래핑 + 텔레그램 알림 시스템
+- Railway에서 24시간 실행되는 백그라운드 서비스
+- 6개 주요 모듈: main.py, config.py, fetch.py, notifier.py, state.py, railway_api.py
+
+## 중요한 파일 우선순위
+1. **핵심 로직**: checker/*.py 파일들
+2. **설정**: config.py, requirements.txt
+3. **문서**: README.md, ARCHITECTURE.md
+4. **배포**: Procfile, railway.json
+
+## 작업 시 고려사항
+- 환경변수 기반 설정 (BOT_TOKEN, CHAT_ID 등)
+- Railway 클라우드 환경 vs 로컬 환경 구분
+- 24시간 무중단 실행을 위한 안정성 고려
+- 텔레그램 API 제한 및 쿨타임 준수
+
+## 코딩 스타일
+- 한국어 주석 및 로그 메시지 사용
+- loguru 로거 사용 (logger.info, logger.error 등)
+- 비동기 함수와 동기 함수 혼재 (텔레그램 봇)
+- 에러 처리 및 자동 복구 로직 중요
+
+## 금지 사항
+- state.json 파일을 직접 수정하지 말 것
+- 환경변수를 하드코딩하지 말 것
+- 텔레그램 봇 토큰을 코드에 노출하지 말 것
+- Railway 환경에서 로컬 파일 시스템에 의존하지 말 것
+
+## 테스트 명령어
+- `python -m checker.main --test` (시스템 테스트)
+- `python -m checker.main --once` (단일 실행)
+- `python -m checker.main --config-test` (설정 확인)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 제로월드 예약 모니터링 시스템 설정 도우미
 
