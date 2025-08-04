@@ -81,23 +81,32 @@ class RailwayAPI:
         return await self._execute_query(query, variables)
     
     async def get_service_info(self, service_id: str) -> Dict[str, Any]:
-        """서비스 정보 조회 (디버깅용)"""
+        """서비스 정보 조회 (간단한 스키마)"""
         query = """
-        query getService($serviceId: String!) {
-            service(id: $serviceId) {
-                id
-                name
-                source {
-                    repo
-                    branch
+        query {
+            me {
+                projects {
+                    edges {
+                        node {
+                            id
+                            name
+                            services {
+                                edges {
+                                    node {
+                                        id
+                                        name
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
         """
         
-        variables = {"serviceId": service_id}
-        logger.info(f"서비스 {service_id} 정보 조회 중...")
-        result = await self._execute_query(query, variables)
+        logger.info(f"서비스 {service_id} 정보 조회 중 (간단한 스키마)...")
+        result = await self._execute_query(query)
         logger.info(f"서비스 정보: {result}")
         return result
 
@@ -240,6 +249,33 @@ BRANCH_THEME_MAPPING = {
 
 
 # 편의 함수들
+async def switch_to_branch_cli(branch_name: str) -> bool:
+    """
+    Railway CLI를 사용한 브랜치 전환 (대안 방법)
+    """
+    try:
+        import subprocess
+        import os
+        
+        logger.info(f"🚂 Railway CLI로 브랜치 '{branch_name}' 전환 시도...")
+        
+        # Railway CLI 명령어 실행
+        result = subprocess.run([
+            "railway", "service", "update", 
+            "--source-branch", branch_name
+        ], capture_output=True, text=True, cwd="/app" if os.path.exists("/app") else ".")
+        
+        if result.returncode == 0:
+            logger.info(f"✅ Railway CLI로 브랜치 '{branch_name}' 전환 성공")
+            return True
+        else:
+            logger.error(f"❌ Railway CLI 실패: {result.stderr}")
+            return False
+            
+    except Exception as e:
+        logger.error(f"❌ Railway CLI 브랜치 전환 실패: {e}")
+        return False
+
 async def switch_to_branch(branch_name: str) -> bool:
     """
     지정된 브랜치로 전환하고 재배포
