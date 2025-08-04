@@ -17,7 +17,7 @@ except ValueError:
 
 # 모니터링 대상 설정
 # main 브랜치: "층간소음", test 브랜치: "사랑하는감?"
-THEME_NAME = "사랑하는감?"  # test 브랜치용
+THEME_NAME = "층간소음"  # test 브랜치용
 
 # 날짜 범위 설정 (현재 날짜부터 8월 16일까지)
 today = datetime.now().date()
